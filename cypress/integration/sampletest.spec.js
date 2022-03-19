@@ -59,16 +59,18 @@ describe('example to-do app', () => {
         // cy.getCookie('cypress-session-cookie').should('exist')
         
         // Old school method thru the UI
-        cy.visit('/account/login', {
-            onBeforeLoad: spyOnAddEventListener
-          }).then(waitForAppStart);
+        // cy.visit('/account/login', {
+        //     onBeforeLoad: spyOnAddEventListener
+        //   }).then(waitForAppStart);
+        cy.visit('/account/login');  
         //login with the UI
         // cy.wait(500);
-        cy.get('input#email').should('be.enabled');
-        cy.get('input#email').type(username);
+        cy.get('button#form-submit-button').should('be.enabled').should('be.visible');
+        cy.get('input#email').should('be.enabled').should('be.visible');
+        cy.get('input#email').click().type(username).should('have.value', username);
         // cy.wait(500);
-        cy.get('input#password').should('be.enabled');
-        cy.get('input#password').type(password);
+        cy.get('input#password').should('be.enabled').should('be.visible');
+        cy.get('input#password').click().type(password).should('have.value', password);
         // cy.wait(500);
         cy.get('button#form-submit-button').should('be.enabled').click();
     })
