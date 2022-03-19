@@ -3,6 +3,7 @@ import creds from '../data/creds.json';
 describe('example to-do app', () => {
 
     const username = creds.emailAddress;
+    const emailAddress = creds.emailAddress;
     const password = creds.password;
 
     //Sample solution for issue with cy.type
@@ -38,12 +39,12 @@ describe('example to-do app', () => {
 
     beforeEach(() => {  
         //This did not work
-    //   cy.visit('/', {
-    //       auth: {
-    //           username,
-    //           password
-    //       },
-    //   }).its('status').should('equal', 200);
+      // cy.visit('/account/login/', {
+      //     auth: {
+      //         username,
+      //         password
+      //     },
+      // }).its('status').should('equal', 200);
 
     // This did not work neither 
         // cy.request({
@@ -54,18 +55,21 @@ describe('example to-do app', () => {
         //         username,
         //         password
         //     },
-        // })
+        // });
+        
         // just to prove we have a session
         // cy.getCookie('cypress-session-cookie').should('exist')
+
+        // cy.visit('/');
         
         // Old school method thru the UI
-        // cy.visit('/account/login', {
-        //     onBeforeLoad: spyOnAddEventListener
-        //   }).then(waitForAppStart);
+        cy.visit('/account/login', {
+            onBeforeLoad: spyOnAddEventListener
+          }).then(waitForAppStart);
 
         // Having issues with cy.type. Found a public bug 
         // https://github.com/cypress-io/cypress/issues/3817
-        cy.visit('/account/login');  
+        // cy.visit('/account/login');  
         //login with the UI
         // cy.wait(500);
         cy.get('button#form-submit-button').should('be.enabled').should('be.visible');
