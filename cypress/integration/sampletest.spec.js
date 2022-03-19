@@ -62,6 +62,9 @@ describe('example to-do app', () => {
         // cy.visit('/account/login', {
         //     onBeforeLoad: spyOnAddEventListener
         //   }).then(waitForAppStart);
+
+        // Having issues with cy.type. Found a public bug 
+        // https://github.com/cypress-io/cypress/issues/3817
         cy.visit('/account/login');  
         //login with the UI
         // cy.wait(500);
