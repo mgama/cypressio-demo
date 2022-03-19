@@ -4,6 +4,7 @@
   "author": "Manuel Gama (mgamamsc@gmail.com)",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "cypress": "^9.5.2"
