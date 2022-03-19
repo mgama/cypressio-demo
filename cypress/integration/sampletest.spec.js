@@ -5,6 +5,37 @@ describe('example to-do app', () => {
     const username = creds.emailAddress;
     const password = creds.password;
 
+    //Sample solution for issue with cy.type
+    //https://www.cypress.io/blog/2018/02/05/when-can-the-test-start/
+    let appHasStarted
+    function spyOnAddEventListener (win) {
+        // win = window object in our application
+        const addListener = win.EventTarget.prototype.addEventListener
+        win.EventTarget.prototype.addEventListener = function (name) {
+            if (name === 'change') {
+            // web app added an event listener to the input box -
+            // that means the web application has started
+            appHasStarted = true
+            // restore the original event listener
+            win.EventTarget.prototype.addEventListener = addListener
+            }
+            return addListener.apply(this, arguments)
+        }
+    }
+
+    function waitForAppStart() {
+        // keeps rechecking "appHasStarted" variable
+        return new Cypress.Promise((resolve, reject) => {
+          const isReady = () => {
+            if (appHasStarted) {
+              return resolve()
+            }
+            setTimeout(isReady, 0)
+          }
+          isReady()
+        })
+      }
+
     beforeEach(() => {  
         //This did not work
     //   cy.visit('/', {
@@ -28,15 +59,17 @@ describe('example to-do app', () => {
         // cy.getCookie('cypress-session-cookie').should('exist')
         
         // Old school method thru the UI
-        cy.visit('/account/login');
+        cy.visit('/account/login', {
+            onBeforeLoad: spyOnAddEventListener
+          }).then(waitForAppStart);
         //login with the UI
-        cy.wait(500);
+        // cy.wait(500);
         cy.get('input#email').should('be.enabled');
         cy.get('input#email').type(username);
-        cy.wait(500);
+        // cy.wait(500);
         cy.get('input#password').should('be.enabled');
         cy.get('input#password').type(password);
-        cy.wait(500);
+        // cy.wait(500);
         cy.get('button#form-submit-button').should('be.enabled').click();
     })
   
