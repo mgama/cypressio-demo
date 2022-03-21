@@ -23,3 +23,10 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+// Workaround solution for cy.type not working properly and entering incomplete strings on input fields when typing
+// Soluction taken  from demetris-manikas on this bug: https://github.com/cypress-io/cypress/issues/3817
+Cypress.Commands.add('text', {prevSubject: true}, (subject, text) => {
+    subject.val(text)
+    return cy.wrap(subject)
+})
