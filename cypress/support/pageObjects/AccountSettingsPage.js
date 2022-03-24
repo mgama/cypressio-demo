@@ -11,7 +11,7 @@ export class AccountSettingsPage {
     }
   
     goToEditAddressBook() {
-        this.getEditAddressBookButton.click();
+        this.getEditAddressBookButton().click();
         return new EditShippingAddressPage();
     }
  }

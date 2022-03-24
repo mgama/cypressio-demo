@@ -69,95 +69,95 @@ export class EditShippingAddressPage {
     } 
   
     changeFirstName(firstName) {
-        return this.changeFirstName()
+        this.getFirstNameInput()
             .click()
             .clear()
             .type(firstName, {force:true});
     }
   
     changeLastName(lastName) {
-        return this.getLastNameInput()
+        this.getLastNameInput()
             .click()
             .clear()
             .type(lastName, {force:true});
     }
   
     changeCompany(company) {
-        return this.getCompanyInput()
+        this.getCompanyInput()
             .click()
             .clear()
             .type(company, {force:true});
     }
   
     changeStreetAddress(streetAddress) {
-        return this.getStreetAddressInput()
+        this.getStreetAddressInput()
             .click()
             .clear()
             .type(streetAddress, {force:true});
     }
   
     changeApt(apt) {
-        return this.getAptInput()
+        this.getAptInput()
             .click()
             .clear()
             .type(apt, {force:true});
     }
   
     changeCity(city) {
-        return this.getCityInput()
+        this.getCityInput()
             .click()
             .clear()
             .type(city, {force:true});
     }
   
     selectCountry(country) {
-        return this.getCountryDropdown()
+        this.getCountryDropdown()
             .select(country);
     }
   
     selectState(state) {
-        return this.getStateDropdown()
+        this.getStateDropdown()
             .select(state);
     }
   
     changeZipCode(zipCode) {
-        return this.getZipCodeInput()
+        this.getZipCodeInput()
             .click()
             .clear()
             .type(zipCode, {force:true});
     }
   
     changePhoneNumber(phoneNumber) {
-        return this.getPhoneNumberInput()
+        this.getPhoneNumberInput()
             .click()
             .clear()
             .type(phoneNumber, {force:true});
     }
   
     saveChanges() {
-        return this.getSaveButton().click();
+        this.getSaveButton().click();
     }
   
     cancelChanges() {
-        return this.getCancelButton().click();
+        this.getCancelButton().click();
     }
   
     waitForSuccessfulAddressUpdateNotification() {
-        return this.getSuccessfulAddressUpdateNotification()
+        this.getSuccessfulAddressUpdateNotification()
             .should('be.visible');
     }
   
     waitForErrorOnAddressUpdateNotification() {
-        return this.getErrorOnAddressUpdateNotification()
+        this.getErrorOnAddressUpdateNotification()
             .should('be.visible');
     }
   
     goBackToAccountSettings() {
-        return this.getBackToAccountSettingsButton().click();
+        this.getBackToAccountSettingsButton().click();
     }
   
     waitForRequiredFieldErrorMessage() {
-        return this.getRequiredFieldErrorMessage()
+        this.getRequiredFieldErrorMessage()
             .should('be.visible');
     }
   }

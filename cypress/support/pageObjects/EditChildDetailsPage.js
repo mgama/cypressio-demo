@@ -44,7 +44,7 @@ export class EditChildDetailsPage {
     }
 
     cancelChanges() {
-        return this.getCancelButton.click();
+        return this.getCancelButton().click();
     }
 
     waitForChildInfoSuccesfullyUpdatedNotification() {
@@ -58,7 +58,7 @@ export class EditChildDetailsPage {
     }
 
     goBackToProfileInfo() {
-        return this.getBackToProfileInfoButton.click();
+        return this.getBackToProfileInfoButton().click();
     }
 
     waitForRequiredChildNameError() {
