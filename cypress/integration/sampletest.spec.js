@@ -3,7 +3,7 @@ import creds from '../data/creds.json';
 describe('Login and go to User profile', () => {
 
     const username = creds.emailAddress;
-    const emailAddress = creds.emailAddress;
+    // const emailAddress = creds.emailAddress;
     const password = creds.password;
 
     //Sample solution for issue with waiting for the app to start or pate to load 
@@ -79,25 +79,24 @@ describe('Login and go to User profile', () => {
         cy.get('input#email')
           .should('be.enabled')
           .click()
-          .text(username)
-          .should('have.value', username)
-        // cy.wait(1000);
+          .type(username, { force: true })
+          .should('have.value', username);
         cy.get('input#password')
           .should('be.enabled')
-          // .click()
-          .text(password)
-          .should('have.value', password)
-        // cy.wait(1000);
-        cy.get('button#form-submit-button')
-          .should('be.enabled')
-          // .trigger("click");
-          .click();
-        cy.intercept('/account#');
-        // cy.waitUntil(() => cy.url().should('contain', 'account#/'));
+          .click()
+          .type(password, { force: true })
+          // Taken from https://stackoverflow.com/questions/47131842/cypress-set-attribute-value
+          .should('have.value', password);
+
     })
   
     it('logins properly and displays Automation user Pop-over', () => {
-      cy.get('my-account-popover-name')
+      cy.get('button#form-submit-button')
+          .should('be.visible')
+          .should('be.enabled')
+          .trigger('click');
+      cy.intercept('/account');
+      cy.get('.my-account-popover-name')
         .should('be.visible')
         .should('have.text', 'AUTOMATION');
 
