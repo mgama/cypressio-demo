@@ -1,3 +1,5 @@
+import { EditShippingAddressPage } from "./EditShippingAddressPage";
+
 export class AccountSettingsPage {
      
     getDisplayedAddress() {
@@ -9,6 +11,7 @@ export class AccountSettingsPage {
     }
   
     goToEditAddressBook() {
-      return this.getEditAddressBookButton.click();
+        this.getEditAddressBookButton.click();
+        return new EditShippingAddressPage();
     }
  }

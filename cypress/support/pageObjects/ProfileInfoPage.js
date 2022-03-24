@@ -1,3 +1,6 @@
+import { EditChildDetailsPage } from "./EditChildDetailsPage";
+import { EditContactDetailsPage } from "./EditContactDetailsPage";
+
 export class ProfileInfoPage {
   
     getContactDetailsHeader() {
@@ -16,11 +19,11 @@ export class ProfileInfoPage {
 
     goToEditContactDetails() {
         cy.get('button#edit-contact-details').click();
-    //   return new EditContactDetailsPage(this.page);
+        return new EditContactDetailsPage();
     }
   
     goToEditChildDetails() {
         cy.get('button#child-0-edit').click();
-    //   return new EditChildDetailsPage(this.page);
+        return new EditChildDetailsPage();
     }
   }

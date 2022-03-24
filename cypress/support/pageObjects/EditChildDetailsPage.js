@@ -1,11 +1,11 @@
 export class EditChildDetailsPage {
   
     getBackToProfileInfoButton() {
-        return cy.get('text=< Back to Profile Info');
+        return cy.contains('< Back to Profile Info');
     }
     
     getEditChildDetailsHeader() {
-        return cy.get('text=Edit Child Details');
+        return cy.contains('Edit Child Details');
     }
 
     getNameInput() {
@@ -13,28 +13,29 @@ export class EditChildDetailsPage {
     } 
 
     getSaveButton() {
-        return cy.get('text=Save');
+        return cy.contains('Save');
     }
 
     getCancelButton() {
-        return cy.get('text=Cancel');
+        return cy.contains('Cancel');
     }
 
     getErrorOnChildInfoUpdateNotification() {
-        return cy.get('text=Error updating child info');
+        return cy.contains('Error updating child info');
     }
 
     getChildInfoSuccesfullyUpdatedNotification() {
-        return cy.get('text=Child info successfully updated');
+        return cy.contains('Child info successfully updated');
     }
 
     getRequiredChildNameError() {
-        return cy.get('text=Required');
+        return cy.contains('Required');
     }
 
     changeName(name) {
         return this.getNameInput()
             .click()
+            .clear()
             .type(name, {force:true})
     }
 

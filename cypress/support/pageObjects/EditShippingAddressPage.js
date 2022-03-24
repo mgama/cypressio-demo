@@ -1,13 +1,11 @@
-import { first } from "cypress/types/lodash";
-
 export class EditShippingAddressPage {
     
     getBackToAccountSettingsButton() {
-        return cy.get('text=Back to Account Settings');
+        return cy.contains('Back to Account Settings');
     }
 
     getEditShippingAddressHeader() {
-        return cy.get('text=Edit Shipping Address');
+        return cy.contains('Edit Shipping Address');
     }
 
     getFirstNameInput() {
@@ -51,107 +49,115 @@ export class EditShippingAddressPage {
     }
     
     getSaveButton() {
-        return cy.get('text=Save');
+        return cy.contains('Save');
     }
 
     getCancelButton() {
-        return cy.get('text=Cancel');
+        return cy.contains('Cancel');
     }
 
     getSuccessfulAddressUpdateNotification() {
-        return cy.get('text=Address successfully updated');
+        return cy.contains('Address successfully updated');
     }
 
     getErrorOnAddressUpdateNotification() {
-        return cy.get('text=Error updating address');
+        return cy.contains('Error updating address');
     }
 
     getRequiredFieldErrorMessage() {
-        return cy.get('text=Required');
+        return cy.contains('Required');
     } 
   
     changeFirstName(firstName) {
         return this.changeFirstName()
             .click()
+            .clear()
             .type(firstName, {force:true});
     }
   
     changeLastName(lastName) {
         return this.getLastNameInput()
             .click()
+            .clear()
             .type(lastName, {force:true});
     }
   
     changeCompany(company) {
-        return cy.getCompanyInput()
+        return this.getCompanyInput()
             .click()
+            .clear()
             .type(company, {force:true});
     }
   
     changeStreetAddress(streetAddress) {
-        return cy.getStreetAddressInput()
+        return this.getStreetAddressInput()
             .click()
+            .clear()
             .type(streetAddress, {force:true});
     }
   
     changeApt(apt) {
-        return cy.getAptInput()
+        return this.getAptInput()
             .click()
+            .clear()
             .type(apt, {force:true});
     }
   
     changeCity(city) {
-        return cy.getCityInput()
+        return this.getCityInput()
             .click()
+            .clear()
             .type(city, {force:true});
     }
   
     selectCountry(country) {
-        return cy.getCountryDropdown()
+        return this.getCountryDropdown()
             .select(country);
     }
   
     selectState(state) {
-        return cy.getStateDropdown()
+        return this.getStateDropdown()
             .select(state);
     }
   
     changeZipCode(zipCode) {
-        return cy.getZipCodeInput()
+        return this.getZipCodeInput()
             .click()
+            .clear()
             .type(zipCode, {force:true});
     }
   
     changePhoneNumber(phoneNumber) {
-        return cy.getPhoneNumberInput()
+        return this.getPhoneNumberInput()
             .click()
+            .clear()
             .type(phoneNumber, {force:true});
     }
   
     saveChanges() {
-        return cy.getSaveButton().click();
+        return this.getSaveButton().click();
     }
   
     cancelChanges() {
-        return cy.getCancelButton().click();
+        return this.getCancelButton().click();
     }
   
     waitForSuccessfulAddressUpdateNotification() {
-        return cy.getSuccessfulAddressUpdateNotification()
+        return this.getSuccessfulAddressUpdateNotification()
             .should('be.visible');
     }
   
     waitForErrorOnAddressUpdateNotification() {
-        return cy.getErrorOnAddressUpdateNotification()
+        return this.getErrorOnAddressUpdateNotification()
             .should('be.visible');
     }
   
     goBackToAccountSettings() {
-        return cy.getBackToAccountSettingsButton().click();
+        return this.getBackToAccountSettingsButton().click();
     }
   
     waitForRequiredFieldErrorMessage() {
-        return cy.getRequiredFieldErrorMessage()
+        return this.getRequiredFieldErrorMessage()
             .should('be.visible');
     }
   }

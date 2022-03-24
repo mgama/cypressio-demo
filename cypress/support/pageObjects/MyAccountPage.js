@@ -1,3 +1,6 @@
+import { ProfileInfoPage } from './ProfileInfoPage';
+import { AccountSettingsPage } from './AccountSettingsPage';
+
 export class MyAccountPage {
     visit() {
         cy.visit('account');
@@ -8,12 +11,12 @@ export class MyAccountPage {
     }
 
     goToProfileInfo() {
-        cy.get('text=Profile Info').click();
-    //   return new ProfileInfoPage(this.page);
+        cy.contains('Profile Info').click();
+        return new ProfileInfoPage();
     }
 
     goToAccountSettings() {
-        cy.get('text=Account Settings').click();
-    //   return new AccountSettingsPage(this.page);
+        cy.contains('Account Settings').click();
+        return new AccountSettingsPage();
     }
   }

@@ -2,11 +2,11 @@
 export class EditContactDetailsPage {
 
     getBackToProfileInfoButton() {
-        return cy.get('text=< Back to Profile Info');
+        return cy.contains('< Back to Profile Info');
     }
 
     getEditContactDetailsHeader() {
-        return cy.get('text=Edit Contact Details');
+        return cy.contains('Edit Contact Details');
     }
 
     getFirstNameInput() {
@@ -18,61 +18,63 @@ export class EditContactDetailsPage {
     }
 
     getSaveButton() {
-        return cy.get('text=Save');
+        return cy.contains('Save');
     }
 
     getCancelButton() {
-        return cy.get('text=Cancel');
+        return cy.contains('Cancel');
     }
 
     getProfileSuccesfullyUpdatedNotification() {
-        return cy.get('text=Profile info successfully updated');
+        return cy.contains('Profile info successfully updated');
     }
 
     getErrorOnProfileUpdateNotification() {
-        return cy.get('text=Error updating profile info');
+        return cy.contains('Error updating profile info');
     }
 
     getRequiredFieldError() {
-        return cy.get('text=Required');
+        return cy.contains('Required');
     }
 
     changeFirstName(firstName) {
-        return cy.getFirstNameInput()
+        return this.getFirstNameInput()
             .click()
+            .clear()
             .type(firstName, {force:true});
     }
 
     changeLastName(lastName) {
-        return cy.getLastNameInput()
+        return this.getLastNameInput()
             .click()
+            .clear()
             .type(lastName, {force:true});
     }
 
     saveChanges() {
-        return cy.getSaveButton().click();
+        return this.getSaveButton().click();
     }
 
     cancelChanges() {
-        return cy.getCancelButton.click();
+        return this.getCancelButton().click();
     }
 
     waitForProfileSuccessfullyUpdatedNotification() {
-        return cy.getProfileSuccesfullyUpdatedNotification()
+        return this.getProfileSuccesfullyUpdatedNotification()
             .should('be.visible');
     }
 
     waitForErrorOnProfileUpdateNotification() {
-        return cy.getErrorOnProfileUpdateNotification()
+        return this.getErrorOnProfileUpdateNotification()
             .should('be.visible');
     }
 
     goBackToProfileInfo() {
-        return cy.getBackToProfileInfoButton().click();
+        return this.getBackToProfileInfoButton().click();
     }
 
     waitForRequiredFieldError() {
-        return cy.getRequiredFieldError()
+        return this.getRequiredFieldError()
             .should('be.visible');
     }
 }

@@ -2,7 +2,7 @@ import creds from '../../data/creds.json';
 
 export class LoginPage {
     visit() {
-        cy.visit('login');
+        cy.visit('account/login');
     }
 
     getEmailInput() {
@@ -18,6 +18,7 @@ export class LoginPage {
     }
 
     loginUser() {
+        this.visit();
         this.getEmailInput()
             .should('be.enabled')
             .click()
