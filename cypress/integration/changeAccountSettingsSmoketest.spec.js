@@ -11,7 +11,7 @@ let editShippingAddressPage;
 // });
 
 beforeEach(() => {
-  new LoginPage().loginUser();
+//   new LoginPage().loginUser();
   const myAccountPage = new MyAccountPage();
   myAccountPage.getAccountPopOverName()
     .should('be.visible')
