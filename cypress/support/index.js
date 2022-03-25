@@ -14,7 +14,9 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
+
+import { LoginPage } from './pageObjects/LoginPage';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
@@ -24,3 +26,28 @@ Cypress.on('uncaught:exception', (err, runnable) => {
   // failing the test
     return false
     })
+
+// To login thru the UI only once before running all the tests
+before(() => {
+  new LoginPage().loginUser();
+});
+
+// Trying out workaround for saving login state with cookies for each test run
+// https://dzone.com/articles/cypress-preserve-cookies-and-keep-login-session-active-in-tests
+afterEach(() => {
+  //Code to Handle the Sesssions in cypress.
+  //Keep the Session alive when you jump to another test
+  let str = [];
+  cy.getCookies().then((cook) => {
+    cy.log(cook);
+    for (let l = 0; l < cook.length; l++) {
+      if (cook.length > 0 && l == 0) {
+        str[l] = cook[l].name;
+        Cypress.Cookies.preserveOnce(str[l]);
+      } else if (cook.length > 1 && l > 1) {
+        str[l] = cook[l].name;
+        Cypress.Cookies.preserveOnce(str[l]);
+      }
+    }
+  })
+})

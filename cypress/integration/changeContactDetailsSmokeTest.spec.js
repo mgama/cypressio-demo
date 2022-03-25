@@ -6,12 +6,7 @@ const generateRandomData = new GenerateRandomData();
 let profileInfoPage;
 let editContactDetailsPage;
 
-// before(() => {
-//   new LoginPage().loginUser();
-// });
-
 beforeEach(() => {
-  new LoginPage().loginUser();
   const myAccountPage = new MyAccountPage();
   myAccountPage.getAccountPopOverName()
     .should('be.visible')
@@ -19,7 +14,9 @@ beforeEach(() => {
   profileInfoPage = myAccountPage.goToProfileInfo();
   // Example of storing text value as a variable
   // https://stackoverflow.com/questions/70743343/get-text-from-an-element-and-store-in-a-variable-in-cypress
-  profileInfoPage.getContactDetailsName().invoke('text').as('currentContactDetailsName');
+  profileInfoPage.getContactDetailsName()
+    .should('be.visible')  
+    .invoke('text').as('currentContactDetailsName');
   cy.get('@currentContactDetailsName').then((text) => {
     cy.log('the currentContactDetailsName is ' + text);
   })

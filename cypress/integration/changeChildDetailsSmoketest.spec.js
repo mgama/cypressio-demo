@@ -6,18 +6,15 @@ const generateRandomData = new GenerateRandomData();
 let profileInfoPage;
 let editChildDetailsPage;
 
-// before(() => {
-//   new LoginPage().loginUser();
-// });
-
 beforeEach(() => {
-    new LoginPage().loginUser();
     const myAccountPage = new MyAccountPage();
     myAccountPage.getAccountPopOverName()
         .should('be.visible')
         .should('not.have.text', '');
     profileInfoPage = myAccountPage.goToProfileInfo();
-    profileInfoPage.getChildDetailsName().invoke('text').as('currentChildDetailsName');
+    profileInfoPage.getChildDetailsName()
+        .should('be.visible')
+        .invoke('text').as('currentChildDetailsName');
     cy.get('@currentChildDetailsName').then((text) => {
         cy.log('the currentChildDetailsName is ' + text);
     })

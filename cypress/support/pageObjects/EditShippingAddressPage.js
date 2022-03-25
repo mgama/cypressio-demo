@@ -25,7 +25,7 @@ export class EditShippingAddressPage {
     }
 
     getAptInput() {
-        return cy.get("input[placeholder='Apt, Suite, or Floor']");
+        return cy.get("input[name='line2']");
     }
     
     getCityInput() {

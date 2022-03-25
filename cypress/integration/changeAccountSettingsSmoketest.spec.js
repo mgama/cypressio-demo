@@ -6,18 +6,15 @@ const generateRandomData = new GenerateRandomData();
 let accountSettingsPage;
 let editShippingAddressPage;
 
-// before(() => {
-//   new LoginPage().loginUser();
-// });
-
 beforeEach(() => {
-  new LoginPage().loginUser();
   const myAccountPage = new MyAccountPage();
   myAccountPage.getAccountPopOverName()
     .should('be.visible')
     .should('not.have.text', '');
   accountSettingsPage = myAccountPage.goToAccountSettings();
-  accountSettingsPage.getDisplayedAddress().invoke('text').as('originalAddress');
+  accountSettingsPage.getDisplayedAddress()
+    .should('be.visible')
+    .invoke('text').as('originalAddress');
   cy.get('@originalAddress').then((text) => {
     cy.log('the originalAddress is ' + text);
   })
@@ -28,6 +25,9 @@ describe('Change Account Settings Smoketests', () => {
 
     it('Negative Test: Change All Address Values (valid US Address) on Account Settings and Cancel Changes', () => {
         const randomStringForTestData = generateRandomData.generateRandomString();
+        editShippingAddressPage.getFirstNameInput()
+            .should('be.visible')
+            .should('be.enabled');
         editShippingAddressPage.changeFirstName(randomStringForTestData);
         editShippingAddressPage.changeLastName(randomStringForTestData);
         editShippingAddressPage.changeCompany(randomStringForTestData);
@@ -53,6 +53,9 @@ describe('Change Account Settings Smoketests', () => {
 
     it('Change All Address Values (valid US Address) on Account Settings and Save Changes', () => {
         const randomStringForTestData =  generateRandomData.generateRandomString();
+        editShippingAddressPage.getFirstNameInput()
+            .should('be.visible')
+            .should('be.enabled');
         editShippingAddressPage.changeFirstName(randomStringForTestData);
         editShippingAddressPage.changeLastName(randomStringForTestData);
         editShippingAddressPage.changeCompany(randomStringForTestData);
@@ -80,6 +83,9 @@ describe('Change Account Settings Smoketests', () => {
 
     it('Change All Address Values (valid Canada Address) on Account Settings and Save Changes', () => {
         const randomStringForTestData =  generateRandomData.generateRandomString();
+        editShippingAddressPage.getFirstNameInput()
+            .should('be.visible')
+            .should('be.enabled');
         editShippingAddressPage.changeFirstName(randomStringForTestData);
         editShippingAddressPage.changeLastName(randomStringForTestData);
         editShippingAddressPage.changeCompany(randomStringForTestData);
@@ -107,7 +113,9 @@ describe('Change Account Settings Smoketests', () => {
 
     it('Negative Test: Change Zip Code to empty value on Account Settings and Verify Error on Required field', () => {
         editShippingAddressPage.getZipCodeInput()
-        .clear();
+            .should('be.visible')
+            .should('be.enabled')
+            .clear();
         editShippingAddressPage.saveChanges();
         editShippingAddressPage.waitForRequiredFieldErrorMessage();
         editShippingAddressPage.getRequiredFieldErrorMessage()
@@ -127,7 +135,9 @@ describe('Change Account Settings Smoketests', () => {
 
     it('Negative Test: Change First Name to empty value on Account Settings and Verify Error on Required field', () => {
         editShippingAddressPage.getFirstNameInput()
-        .clear();
+            .should('be.visible')
+            .should('be.enabled')
+            .clear();
         editShippingAddressPage.saveChanges();
         editShippingAddressPage.waitForRequiredFieldErrorMessage();
         editShippingAddressPage.getRequiredFieldErrorMessage()
@@ -147,7 +157,9 @@ describe('Change Account Settings Smoketests', () => {
 
     it('Negative Test: Change Last Name to empty value on Account Settings and Verify Error on Required field', () => {
         editShippingAddressPage.getLastNameInput()
-        .clear();
+            .should('be.visible')
+            .should('be.enabled')
+            .clear();
         editShippingAddressPage.saveChanges();
         editShippingAddressPage.waitForRequiredFieldErrorMessage();
         editShippingAddressPage.getRequiredFieldErrorMessage()
@@ -167,7 +179,9 @@ describe('Change Account Settings Smoketests', () => {
 
     it('Negative Test: Change Street Address to empty value on Account Settings and Verify Error on Required field', () => {
         editShippingAddressPage.getStreetAddressInput()
-        .clear();
+            .should('be.visible')
+            .should('be.enabled')
+            .clear();
         editShippingAddressPage.saveChanges();
         editShippingAddressPage.waitForRequiredFieldErrorMessage();
         editShippingAddressPage.getRequiredFieldErrorMessage()
@@ -187,7 +201,9 @@ describe('Change Account Settings Smoketests', () => {
 
     it('Negative Test: Change City to empty value on Account Settings and Verify Error on Required field', () => {
         editShippingAddressPage.getCityInput()
-        .clear();
+            .should('be.visible')
+            .should('be.enabled')
+            .clear();
         editShippingAddressPage.saveChanges();
         editShippingAddressPage.waitForRequiredFieldErrorMessage();
         editShippingAddressPage.getRequiredFieldErrorMessage()
